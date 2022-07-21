@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'public/sessions#new_guest'
+  end
 
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
@@ -12,7 +15,8 @@ Rails.application.routes.draw do
   namespace :public do
     root to: 'homes#top'
     resources :spots
-    resources :users, only: [:show, :edit, :update] do
+    get 'users/my_page' => 'users#show'
+    resources :users, only: [:edit, :update] do
       collection do
         get :unsubscribe
         patch :withdraw

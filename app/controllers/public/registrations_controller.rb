@@ -4,6 +4,15 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
+  before_action :check_user, only: %i[update patch]
+
+  def check_user
+    if resource.email == 'guest@example.com'
+      redirect_to public_spots_path, alert: 'ゲストユーザーの編集・削除できません。'
+    end
+  end
+
+
   # GET /resource/sign_up
   # def new
   #   super

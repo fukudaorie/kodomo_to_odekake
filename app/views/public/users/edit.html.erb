@@ -1,6 +1,6 @@
-<div class = "container">
+
   <h3>会員情報編集</h3>
-  <%= form_with model: @user, url: public_user_path do |f| %>
+  <%= form_with model: @user, url: public_user_path, method: :patch do |f| %>
   <div class="form-group row">
     <%= f.label "ニックネーム", class: "col-md-2" %>
     <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname", class: 'form-control col-md-2 mr-5' %>
@@ -17,4 +17,3 @@
   </div>
   </div>
   <% end %>
-</div>

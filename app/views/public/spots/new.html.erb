@@ -1,2 +1,15 @@
-<h1>Public::Spots#new</h1>
-<p>Find me in app/views/public/spots/new.html.erb</p>
+<div class = "container">
+  <h3>おすすめスポットを投稿する</h3>
+  <%= form_with model: @spot, url: public_spots_path, local: true do |f| %>
+  <%= f.label "画像" %>
+  <%= f.file_field :image, accept: "image/*" %><br />
+
+  <%= f.label "名前" %>
+  <%= f.text_field :name %><br />
+
+  <%= f.label "住所" %>
+  <%= f.text_field :address %><br />
+  
+  <%= f.submit "投稿する" %>
+  <% end %>
+</div>

@@ -1,13 +1,19 @@
 <div class = "container">
 <h2>新規登録</h2>
 
-<%= form_with model @user, url: user_registration_path do |f| %>
+<%= form_with model: @user, url: user_registration_path do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
 
   <div class="field">
-  <%= f.label "ニックネーム" %><br>
-  <%= f.text_field :nickname %>
-</div>
+    <%= f.label "ニックネーム" %><br>
+    <%= f.text_field :nickname %>
+  </div>
+
+  <%= f.radio_button :sex, Child.sexes.key(0), class: "ml-5" %>
+  <%= f.label :sex, Child.sexes_i18n[:boy], class: "h5" %><br />
+
+  <%= f.radio_button :sex, Child.sexes.key(1), class: "ml-5" %>
+  <%= f.label :sex, Child.sexes_i18n[:girl], class: "h5" %><br />
 
   <div class="field">
     <%= f.label "メールアドレス" %><br />

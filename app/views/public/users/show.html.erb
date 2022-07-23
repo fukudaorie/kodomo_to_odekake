@@ -1,1 +1,14 @@
-<%= link_to "編集", edit_public_user_path(current_user) %>
+<div class = "container">
+  <div class = "row">
+    <div class = "col">ニックネーム</div>
+    <div class = "col"><%= @user.nickname %></div>
+  </div>
+  <div class = "row">
+    <div class = "col">メールアドレス</div>
+    <div class = "col"><%= @user.email %></div>
+  </div>
+
+
+  <%= link_to "編集", edit_public_user_path(current_user) %>
+  <%= link_to "投稿する", new_public_spot_path %>
+</div>

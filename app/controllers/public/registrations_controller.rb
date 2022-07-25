@@ -14,14 +14,20 @@ class Public::RegistrationsController < Devise::RegistrationsController
 
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  #def new
+  #  super
+  #  @user = User.new
+  #  @children = @user.children.build
+  #  pp 'controller'
+  #  pp @user
+  #end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  #def create
+  #  super
+  #  @user = User.new(user_params)
+  #  @user.save
+  #end
 
   # GET /resource/edit
   # def edit
@@ -68,4 +74,10 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private
+
+  def user_params
+      params.require(:user).permit(:nickname, :email, :password,:password_confirmation, children_attributes: [:id, :sex, :birth_date,:_destroy])
+  end
 end

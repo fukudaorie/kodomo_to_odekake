@@ -13,6 +13,7 @@ class Public::SpotsController < ApplicationController
   end
 
   def show
+    @spot = Spot.find(params[:id])
   end
 
   def edit

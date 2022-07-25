@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2022_07_23_073003) do
   create_table "children", force: :cascade do |t|
     t.integer "user_id", null: false
     t.date "birth_date", null: false
-    t.string "sex", null: false
+    t.integer "sex", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

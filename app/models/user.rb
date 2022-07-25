@@ -3,9 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
+
   has_many :posts, dependent: :destroy
   has_many :children, dependent: :destroy
+  accepts_nested_attributes_for :children
   has_many :favorits, dependent: :destroy
 
   def self.guest

@@ -7,6 +7,15 @@
     <div class = "col">メールアドレス</div>
     <div class = "col"><%= @user.email %></div>
   </div>
+  <div class = "row">
+    <div class = "col">性別</div>
+    <div class = "col">
+      <% @user.children.each do |child| %>
+        <%= child.sex_i18n %><br />
+        <%= child.age %>歳
+      <% end %>
+    </div>
+  </div>
 
 
   <%= link_to "編集", edit_public_user_path(current_user) %>

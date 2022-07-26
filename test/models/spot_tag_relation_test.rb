@@ -1,6 +1,6 @@
 require "test_helper"
 
-class GenreTest < ActiveSupport::TestCase
+class SpotTagRelationTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

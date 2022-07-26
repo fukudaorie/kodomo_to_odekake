@@ -18,7 +18,6 @@ Rails.application.routes.draw do
     get 'users/my_page' => 'users#show'
     resources :users, only: [:edit, :update] do
       collection do
-        get :unsubscribe
         patch :withdraw
       end
     end

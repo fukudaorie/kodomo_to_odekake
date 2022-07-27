@@ -5,7 +5,8 @@ class Public::SpotsController < ApplicationController
 
   def create
     @spot = Spot.new(spot_params)
-    @spot.save
+    tag_list = params[:spot][:tag_ids].split(",") #追加
+    @spot.tag_save(tag_list)
     redirect_to public_spot_path(@spot)
   end
 
@@ -22,6 +23,6 @@ class Public::SpotsController < ApplicationController
   private
 
   def spot_params
-    params.require(:spot).permit(:image, :name, :address, :genre_id)
+    params.require(:spot).permit(:image, :name, :address, tag_ids: [])
   end
 end

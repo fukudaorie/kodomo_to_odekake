@@ -3,14 +3,22 @@
   <%= form_with model: @spot, url: public_spots_path, local: true do |f| %>
   <%= f.label "名前" %>
   <%= f.text_field :name %><br />
-  
+
+  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+    <div class='form-check'>
+      <%= tag.label class: 'form-check-label' do %>
+        <%= tag.check_box class: 'form-check-input' %>
+        <%= tag.text %>
+      <% end %>
+    </div>
+  <% end %>
+
   <%= f.label "画像" %>
   <%= f.file_field :image, accept: "image/*" %><br />
 
-  <%= 
   <%= f.label "住所" %>
   <%= f.text_field :address %><br />
-  
+
   <%= f.submit "投稿する" %>
   <% end %>
 </div>

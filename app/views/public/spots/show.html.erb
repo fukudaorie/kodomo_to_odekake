@@ -9,7 +9,10 @@
       <% end %>
     </div>
     <div class = "col">
-      
+      <% @spot.tags.each do |tag| %>
+        <span><%= tag.name %></span>
+      <% end %>
+      <%= @spot.address %>
     </div>
   </div>
 </div>

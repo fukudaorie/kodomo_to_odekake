@@ -5,9 +5,14 @@ class Public::SpotsController < ApplicationController
 
   def create
     @spot = Spot.new(spot_params)
-    tag_list = params[:spot][:tag_ids].split(",") #追加
-    @spot.tag_save(tag_list)
-    redirect_to public_spot_path(@spot)
+    @spot.user = current_user
+    tag_list = params[:spot][:tag_ids]
+    if @spot.save
+      @spot.save_tag(tag_list)
+      redirect_to public_spot_path(@spot),notice:'投稿完了しました:)'
+    else
+      render:new
+    end
   end
 
   def index
@@ -23,6 +28,6 @@ class Public::SpotsController < ApplicationController
   private
 
   def spot_params
-    params.require(:spot).permit(:image, :name, :address, tag_ids: [])
+    params.require(:spot).permit(:image, :name, :address, tag_ids:[])
   end
 end

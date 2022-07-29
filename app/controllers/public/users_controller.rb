@@ -4,7 +4,7 @@ class Public::UsersController < ApplicationController
   end
 
   def edit
-    @user = current_user
+    @user = User.find(params[:id])
   end
 
   def update
@@ -15,9 +15,6 @@ class Public::UsersController < ApplicationController
       @user.update(user_params)
       redirect_to public_users_my_page_path
     end
-  end
-
-  def unsubscribe
   end
 
   def withdraw

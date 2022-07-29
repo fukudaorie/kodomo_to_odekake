@@ -11,9 +11,9 @@ class Spot < ApplicationRecord
       spot_tag_relations_records.destroy_all
     end
 
-    tag_list.select do |tag|
-      tag.present?
-    end
+    # tag_list.select do |tag|
+    #   tag.present?
+    # end
     tag_list.select(&:present?).each do |tag|
       inspected_tag = Tag.find(tag)
       tags << inspected_tag

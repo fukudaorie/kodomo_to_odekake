@@ -7,16 +7,16 @@
     <div class = "col">メールアドレス</div>
     <div class = "col"><%= @user.email %></div>
   </div>
-  <div class = "row">
-    <div class = "col">性別</div>
-    <div class = "col">
-      <% @user.children.each do |child| %>
-        <%= child.sex_i18n %><br />
-        <%= child.age %>歳
-      <% end %>
+  <% @user.children.each do |child| %>
+    <div class = "row">
+      <div class = "col">性別</div>
+      <div class = "col"><%= child.sex_i18n %></div><br />
     </div>
-  </div>
-
+    <div class = "row">
+      <div class = "col">年齢</div>
+      <div class = "col"><%= child.age %>歳</div><br />
+    </div>
+  <% end %>
 
   <%= link_to "編集", edit_public_user_path(current_user) %>
   <%= link_to "投稿する", new_public_spot_path %>

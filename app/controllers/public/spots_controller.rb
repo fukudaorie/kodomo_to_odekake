@@ -16,6 +16,14 @@ class Public::SpotsController < ApplicationController
   end
 
   def index
+    @spots = Spot.all
+    if params[:tag_ids]
+      @spots = []
+      params[:tag_ids].each do |key, value|
+        @spots += Tag.find_by(name: key).spots if value == "1"
+      end
+      @spots.uniq!
+    end
   end
 
   def show

@@ -8,12 +8,14 @@
   </div>
 
   <div class="users">
+
     <%= s.fields_for :children do |t| %>
-      <%= render "public/registrations/child_fields", f: t %>
+      <%= render partial: "public/registrations/child_fields", locals: { f: t } %>
     <% end %>
     <div class="links">
       <%= link_to_add_association "子供を追加", s, :children %>
     </div>
+
   </div>
 
 

@@ -28,6 +28,7 @@ class Public::SpotsController < ApplicationController
 
   def show
     @spot = Spot.find(params[:id])
+    @post = Post.new
   end
 
   def edit

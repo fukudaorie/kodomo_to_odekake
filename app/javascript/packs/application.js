@@ -15,6 +15,21 @@ import "cocoon"
 import "../stylesheets/application"
 import '@fortawesome/fontawesome-free/js/all'
 
+const images = require.context('../images', true)
+const imagePath = (name) => images(name, true)
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+window.$ = window.jQuery = require('jquery');
+require('packs/raty')
+
+$('#star').raty({
+    size     : 36,
+    starOff:  '<%= javascript/images('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+
+    scoreName: 'comment[star]',
+    half: false,
+  });

@@ -25,11 +25,3 @@ ActiveStorage.start()
 window.$ = window.jQuery = require('jquery');
 require('packs/raty')
 
-$('#star').raty({
-    size     : 36,
-    starOff:  '<%= javascript/images('star-off.png') %>',
-    starOn : '<%= asset_path('star-on.png') %>',
-
-    scoreName: 'comment[star]',
-    half: false,
-  });

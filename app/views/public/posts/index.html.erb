@@ -1,2 +1,20 @@
-<h1>Public::Posts#index</h1>
-<p>Find me in app/views/public/posts/index.html.erb</p>
+<h1>口コミ一覧</h1>
+<%= link_to '口コミを投稿する', public_spot_posts_path(spot_id: params[:spot_id]) %>
+<% @posts.each do |post| %>
+
+  <div class=card>
+    <p>内容:<%= post.comment %></p>
+    <p>評価 :<%= post.star %>点</p>
+    <div id="star-rate<%= post.id%>"></div>
+    <script>
+      $('#star-rate<%= post.id%>').raty({
+        size      : 36,
+        starOff   : '<%= asset_path('star-off.png') %>',
+        starOn    : '<%= asset_path('star-on.png') %>',
+        half      : false,
+        readOnly: true,
+        score: <%= post.star %>,
+      });
+    </script>
+  </div>
+<% end %>

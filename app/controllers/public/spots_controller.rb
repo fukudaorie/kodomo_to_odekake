@@ -24,6 +24,11 @@ class Public::SpotsController < ApplicationController
       end
       @spots.uniq!
     end
+    if params[:name].present?
+      @spots = @spots.get_by_name params[:name]
+    end
+   
+
   end
 
   def show
@@ -37,6 +42,7 @@ class Public::SpotsController < ApplicationController
   private
 
   def spot_params
-    params.require(:spot).permit(:image, :name, :address, tag_ids:[])
+    params.require(:spot).permit(:image, :name, :address, :tag_id)
   end
+  # tag_ids:[]
 end

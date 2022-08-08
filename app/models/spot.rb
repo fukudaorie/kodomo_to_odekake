@@ -19,8 +19,10 @@ class Spot < ApplicationRecord
       tags << inspected_tag
     end
   end
-  
-  scope :get_by_name, ->(name) {
-where("name like ?", "%#{name}%")
-}
+
+#   scope :get_by_name, ->(name) {
+# where("name like ?", "%#{name}%")
+# }
+
+
 end

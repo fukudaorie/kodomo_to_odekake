@@ -24,10 +24,7 @@ class Public::SpotsController < ApplicationController
       end
       @spots.uniq!
     end
-    if params[:name].present?
-      @spots = @spots.get_by_name params[:name]
-    end
-   
+
 
   end
 
@@ -39,10 +36,16 @@ class Public::SpotsController < ApplicationController
   def edit
   end
 
+  def search
+    keyword = params[:keyword]
+    @spots = Spot.where(['name LIKE(?) OR address LIKE(?)', "%#{keyword}%", "%#{keyword}%"])
+    render 'public/spots/index'
+  end
+
   private
 
   def spot_params
-    params.require(:spot).permit(:image, :name, :address, :tag_id)
+    params.require(:spot).permit(:image, :name, :address, :tag_id, :keyword)
   end
   # tag_ids:[]
 end

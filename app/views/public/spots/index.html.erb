@@ -1,3 +1,4 @@
+タグ検索
 <%= form_tag({controller:"spots",action:"index"}, method: :get) do %>
     <% Tag.all.each do |t| %>
         <li><%= check_box :tag_ids, t.name %><%= t.name %></li>
@@ -5,10 +6,10 @@
     <%= submit_tag '検索' %>
 <% end %>
 
-<%= form_tag(public_spots_path, method: "get") do %>
-<%= label_tag :name, "名前" %><%= text_field_tag :name, params[:name] %>
-<%#= label_tag :name, "性別" %>
-<%#= select_tag :tag_id, options_for_select(Spot.tag), include_blank: true %>
+フリーワード検索
+
+<%= form_tag(search_public_spots_path, method: "get") do %>
+<%= label_tag :name, "名前" %><%= text_field_tag :keyword, params[:keyword] %>
 <%= submit_tag "検索" %>
 <% end %>
 

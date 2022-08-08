@@ -16,6 +16,9 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     resources :spots do
       resources :posts, only: [:index, :create]
+      collection do
+        get 'search'
+      end
     end
     get 'users/my_page' => 'users#show'
     resources :users, only: [:edit, :update] do

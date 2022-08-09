@@ -3,15 +3,11 @@
     <% Tag.all.each do |t| %>
         <li><%= check_box :tag_ids, t.name %><%= t.name %></li>
     <% end %>
+    <%= label_tag :name, "名前" %><%= text_field_tag :keyword, params[:keyword] %>
     <%= submit_tag '検索' %>
 <% end %>
 
-フリーワード検索
 
-<%= form_tag(search_public_spots_path, method: "get") do %>
-<%= label_tag :name, "名前" %><%= text_field_tag :keyword, params[:keyword] %>
-<%= submit_tag "検索" %>
-<% end %>
 
 <% @spots.each do |spot| %>
 <%= spot.name %>

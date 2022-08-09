@@ -17,14 +17,20 @@ class Public::SpotsController < ApplicationController
 
   def index
     @spots = Spot.all
-    if params[:tag_ids]
-      @spots = []
-      params[:tag_ids].each do |key, value|
-        @spots += Tag.find_by(name: key).spots if value == "1"
-      end
-      @spots.uniq!
+    redirect_to public_spots_path if params[:keyword] == ""
+    split_keyword = params[:keyword].split(/[[:blank:]]+/)
+    spots_ids = []
+    split_keyword.each do |keyword|
+      next if keyword == ""
+      spots_ids += Spot.where(['name LIKE(?) OR address LIKE(?)', "%#{split_keyword}%", "%#{split_keyword}%"]).pluck('id')
     end
-
+    if params[:tag_ids].present?
+      params[:tag_ids].each do |key, value|
+        spots_ids += Tag.find_by(name: key).spots.pluck('id') if value == "1"
+      end
+      spots_ids.uniq
+      @spots.where!(id: spots_ids) if spots_ids.present?
+    end
 
   end
 
@@ -36,16 +42,10 @@ class Public::SpotsController < ApplicationController
   def edit
   end
 
-  def search
-    keyword = params[:keyword]
-    @spots = Spot.where(['name LIKE(?) OR address LIKE(?)', "%#{keyword}%", "%#{keyword}%"])
-    render 'public/spots/index'
-  end
 
   private
 
   def spot_params
-    params.require(:spot).permit(:image, :name, :address, :tag_id, :keyword)
+    params.require(:spot).permit(:image, :name, :address, :keyword)
   end
-  # tag_ids:[]
 end

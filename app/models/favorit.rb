@@ -1,4 +1,4 @@
 class Favorit < ApplicationRecord
   belongs_to :user
-  belongs_to :post
+  belongs_to :spot
 end

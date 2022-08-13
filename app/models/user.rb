@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :spots, dependent: :destroy
   has_many :children, dependent: :destroy
   accepts_nested_attributes_for :children
-  has_many :favorits, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|

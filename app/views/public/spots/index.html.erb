@@ -1,14 +1,30 @@
-タグ検索
-<%= form_tag({controller:"spots",action:"index"}, method: :get) do %>
-    <% Tag.all.each do |t| %>
-        <li><%= check_box :tag_ids, t.name %><%= t.name %></li>
-    <% end %>
-    <%= label_tag :name, "名前" %><%= text_field_tag :keyword, params[:keyword] %>
-    <%= submit_tag '検索' %>
-<% end %>
-
-
-
-<% @spots.each do |spot| %>
-<%= spot.name %>
-<% end %>
+<div class = "container">
+    <div class = "row">
+        <div class = "col-md-4">
+            タグ検索
+            <%= form_tag({controller:"spots",action:"index"}, method: :get) do %>
+                <% Tag.all.each do |t| %>
+                    <li><%= check_box :tag_ids, t.name %><%= t.name %></li>
+                <% end %>
+                <%= label_tag :name, "名前" %><%= text_field_tag :keyword, params[:keyword] %>
+                <%= submit_tag '検索' %>
+            <% end %>
+        </div>
+        <div class = "col-md-7">
+            <div class = "row">
+            <% @spots.each do |spot| %>
+            <div class = "col-md-3 mr-1 mb-3">
+            <%= link_to public_spot_path(spot) do %>
+                <% if spot.image.attached? %>
+                    <%= image_tag spot.image, size: "50x50" %>
+                <% else %>
+                    <%= image_tag 'no_image', size: "50x50" %>
+                <% end %>
+                <%= spot.name %>
+            <% end %>
+            </div>
+            <% end %>
+            </div>
+        </div>
+    </div>
+</div>

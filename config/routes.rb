@@ -16,14 +16,15 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     resources :spots do
       resources :posts, only: [:index, :create]
-      collection do
-        get 'search'
-      end
+      resource :favorites, only: [:create, :destroy, :index]
     end
     get 'users/my_page' => 'users#show'
     resources :users, only: [:edit, :update] do
       collection do
         patch :withdraw
+      end
+      member do
+        get :favorites
       end
     end
 

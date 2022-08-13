@@ -28,6 +28,11 @@ class Public::UsersController < ApplicationController
     end
   end
 
+  def favorites
+    favorites = Favorite.where(user_id: current_user.id).pluck(:spot_id)
+    @favorite_spots = Spot.find(favorites)
+  end
+
   private
 
   def user_params

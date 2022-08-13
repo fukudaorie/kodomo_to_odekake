@@ -3,7 +3,7 @@ class Spot < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :spot_tag_relations, dependent: :destroy
   has_many :tags, through: :spot_tag_relations, dependent: :destroy
-  has_many :favorits, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   has_one_attached :image
 
   def save_tag(tag_list)
@@ -21,9 +21,8 @@ class Spot < ApplicationRecord
     end
   end
 
-#   scope :get_by_name, ->(name) {
-# where("name like ?", "%#{name}%")
-# }
-
+  def favorited_by?(user)
+    favorites.where(user_id: user.id).exists?
+  end
 
 end

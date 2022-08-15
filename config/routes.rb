@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :posts, only: [:index, :create]
       resource :favorites, only: [:create, :destroy, :index]
     end
+    get '/map_request', to: 'spots#map', as: 'map_request'
     get 'users/my_page' => 'users#show'
     resources :users, only: [:edit, :update] do
       collection do

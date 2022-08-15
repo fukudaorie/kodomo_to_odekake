@@ -61,3 +61,5 @@ gem 'devise'
 gem "enum_help"
 
 gem "cocoon"
+
+gem 'geocoder'

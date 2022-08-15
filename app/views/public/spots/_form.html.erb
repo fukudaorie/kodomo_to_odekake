@@ -1,13 +1,10 @@
 <%= form_with model: [spot, post], url: public_spot_posts_path(spot), local: true do |f| %>
   <div class="field">
-  <div>
-    <%= f.label "コメント"%>
-    <%= f.text_field :comment %>
-  </div>
+  
 
 
     <div class="form-group row" id="star">
-    <%= f.label :star,'評価 ', class:'col-md-3 col-form-label' %>
+    <%= f.label :star,'評価 ', class:'col-md-1 col-form-label' %>
     <%= f.hidden_field :star, id: :post_star %>
     <% f.hidden_field :spot_id %>
   </div>
@@ -21,6 +18,10 @@
     half: false,
   });
   </script>
+  <div>
+    <%= f.label "コメント"%><br />
+    <%= f.text_area :comment %>
+  </div>
 
   <div>
     <%= f.submit "保存" %>

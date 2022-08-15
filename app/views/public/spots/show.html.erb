@@ -8,6 +8,7 @@
         <%= image_tag 'no_image', size: "200x200" %>
       <% end %>
       <%= @spot.user.nickname %>
+      <% if current_user.email != 'guest@example.com' %>
       <% if @spot.favorited_by?(current_user) %>
         <p>
         <%= link_to public_spot_favorites_path(@spot), method: :delete do %>
@@ -21,6 +22,7 @@
         <% end %>
         </p>
       <% end %>
+      <% end %>
     </div>
     <div class = "col">
       <% @spot.tags.each do |tag| %>
@@ -31,3 +33,19 @@
   </div>
   <%= render 'public/spots/form', post: @post, spot: @spot %>
 </div>
+<div id='map'></div>
+<style>
+#map{
+  height: 400px;
+}
+</style>
+
+<script>
+function initMap(){
+  let map = new google.maps.Map(document.getElementById('map'), {
+  center: {lat: -34.397, lng: 150.644},
+  zoom: 8
+  });
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4_HCo7pkqmrHfr73FSW_6rxrBzw_3utA&callback=initMap" async defer></script>

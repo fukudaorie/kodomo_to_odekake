@@ -65,3 +65,5 @@ gem "cocoon"
 gem 'geocoder'
 
 gem 'dotenv'
+
+gem "dotenv-rails"

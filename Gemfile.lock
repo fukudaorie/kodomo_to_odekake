@@ -88,6 +88,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    dotenv (2.8.1)
     enum_help (0.0.19)
       activesupport (>= 3.0.0)
     erubi (1.10.0)
@@ -236,6 +237,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   cocoon
   devise
+  dotenv
   enum_help
   geocoder
   jbuilder (~> 2.7)

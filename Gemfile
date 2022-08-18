@@ -63,3 +63,5 @@ gem "enum_help"
 gem "cocoon"
 
 gem 'geocoder'
+
+gem 'dotenv'

@@ -13,6 +13,7 @@ class Public::SpotsController < ApplicationController
     else
       render:new
     end
+
   end
 
   def index
@@ -55,14 +56,21 @@ class Public::SpotsController < ApplicationController
 
   def edit
   end
-  
+
   def map
-  # respond_to以下の記述によって、
-  # remote: trueのアクセスに対して、
-  # map.js.erbが変えるようになります。
-  respond_to do |format|
-    format.js
-  end
+    results = Geocoder.search(params[:address])
+    @latlng = results.first.coordinates
+    
+    results = Geocoder.search("東京タワー")
+    @latlng2 = results.first.coordinates
+    # これでmap.js.erbで、経度緯度情報が入った@latlngを使える。
+    # respond_to以下の記述によって、
+    # remote: trueのアクセスに対して、
+    # map.js.erbが変えるようになります。
+    @target_address = params[:address]
+    respond_to do |format|
+      format.js
+    end
   end
 
 

@@ -1,42 +1,57 @@
 <div class = "container">
   <h3>おすすめスポットを投稿する</h3>
-  <%= form_with model: @spot, url: public_spots_path, local: true do |f| %>
-  <%= f.label "名前" %>
-  <%= f.text_field :name %><br />
+  <div class = "row">
+    <div class = "col">
+      <%= form_with model: @spot, url: public_spots_path, local: true do |f| %>
+      <%= f.label "名前" %>
+      <%= f.text_field :name %><br />
 
-  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
-    <div class='form-check'>
-      <%= tag.label class: 'form-check-label' do %>
-        <%= tag.check_box class: 'form-check-input' %>
-        <%= tag.text %>
+      <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+        <div class='form-check'>
+          <%= tag.label class: 'form-check-label' do %>
+            <%= tag.check_box class: 'form-check-input' %>
+            <%= tag.text %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <%= f.label "画像" %>
+      <%= f.file_field :image, accept: "image/*" %><br />
+
+      <%= f.label "場所" %>
+      <%= f.text_field :address %><br />
+
+      <%= f.submit "投稿する" %>
       <% end %>
     </div>
-  <% end %>
-
-  <%= f.label "画像" %>
-  <%= f.file_field :image, accept: "image/*" %><br />
-
-  <%= f.label "住所" %>
-  <%= f.text_field :address %><br />
-
-  <%= f.submit "投稿する" %>
-  <% end %>
-</div>
-
-<div id='map'></div>
-<style>
-#map{
-  height: 400px;
-}
-</style>
+    <div class = "col">
+      <%= form_with url: public_map_request_path, method: :get, local: false do |f|%>
+        <%= f.hidden_field :address %>
+        <%= f.submit '地図表示で確認してみる', :onclick => "return copyAddress()" %>
+      <% end %>
+      <br />
+      <div id='map'></div>
+      <style>
+      #map{
+        height: 400px;
+      }
+      </style>
+    </div>
+  </div>
 
 <script>
 let mapInstance
 function initMap(){
-  let map = new google.maps.Map(document.getElementById('map'), {
+  mapInstance = new google.maps.Map(document.getElementById('map'), {
   center: {lat: -34.397, lng: 150.644},
   zoom: 8
   });
 }
+
+function copyAddress() {
+  let target_address = $("#spot_address").val();
+  $("#address").val(target_address);
+  return true;
+}
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4_HCo7pkqmrHfr73FSW_6rxrBzw_3utA&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=" async defer></script>

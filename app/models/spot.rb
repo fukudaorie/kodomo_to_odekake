@@ -25,4 +25,20 @@ class Spot < ApplicationRecord
     favorites.where(user_id: user.id).exists?
   end
 
+  def avg_star
+    unless self.posts.empty?
+      posts.average(:star).round(1).to_f
+    else
+      0.0
+    end
+  end
+
+  def post_star_percentage
+    unless self.posts.empty?
+      posts.average(:star).round(1).to_f*100/5
+    else
+      0.0
+    end
+  end
+
 end

@@ -54,13 +54,16 @@ class Public::SpotsController < ApplicationController
     @post = Post.new
   end
 
-  def edit
+  def destroy
+    @spot =Spot.find(params[:id])
+    @spot.destroy
+    redirect_to public_spots_path
   end
 
   def map
     results = Geocoder.search(params[:address])
     @latlng = results.first.coordinates
-    
+
     results = Geocoder.search("東京タワー")
     @latlng2 = results.first.coordinates
     # これでmap.js.erbで、経度緯度情報が入った@latlngを使える。
@@ -77,6 +80,6 @@ class Public::SpotsController < ApplicationController
   private
 
   def spot_params
-    params.require(:spot).permit(:image, :name, :address, :keyword)
+    params.require(:spot).permit(:image, :name, :address)
   end
 end

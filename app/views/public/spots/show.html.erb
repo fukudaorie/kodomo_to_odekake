@@ -1,13 +1,19 @@
 <div class = "container">
   <h3><%= @spot.name %></h3>
+  <% if @spot.user == current_user && @spot.user.email != 'guest@example.com' %>
+  <%= link_to "削除", public_spot_path(@spot), method: :delete %>
+  <% end %>
   <div class = "row">
     <div class = "col">
       <% if @spot.image.attached? %>
         <%= image_tag @spot.image, size: "200x200" %>
       <% else %>
         <%= image_tag 'no_image', size: "200x200" %>
+      <% end %><br />
+      <%= @spot.user.nickname %>さん<br />
+      <% @spot.user.children.each do |child| %>
+        <%= child.age %>歳<%= child.sex_i18n %>
       <% end %>
-      <%= @spot.user.nickname %>
       <% if current_user.email != 'guest@example.com' %>
       <% if @spot.favorited_by?(current_user) %>
         <p>
@@ -48,4 +54,4 @@ function initMap(){
   });
 }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=ENV['DATABASE_PASS']" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key= #{ENV['SECRET_KEY']}" async defer></script>

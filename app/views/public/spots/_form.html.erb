@@ -1,31 +1,30 @@
 <%= form_with model: [spot, post], url: public_spot_posts_path(spot), local: true do |f| %>
   <div class="field">
-  
-
 
     <div class="form-group row" id="star">
-    <%= f.label :star,'評価 ', class:'col-md-1 col-form-label' %>
-    <%= f.hidden_field :star, id: :post_star %>
-    <% f.hidden_field :spot_id %>
-  </div>
-  <script>
-  $('#star').raty({
-    size     : 36,
-    starOff:  '<%= asset_path('star-off.png') %>',
-    starOn : '<%= asset_path('star-on.png') %>',
-
-    scoreName: 'post[star]',
-    half: false,
-  });
-  </script>
-  <div>
-    <%= f.label "コメント"%><br />
-    <%= f.text_area :comment %>
-  </div>
-
-  <div>
-    <%= f.submit "保存" %>
-  </div>
-
-  <%= link_to "他のレビューを見る", public_spot_posts_path(spot) %>
+      <%= f.label :star,'評価 ', class:'col-md-1 col-form-label' %>
+      <%= f.hidden_field :star, id: :post_star %>
+      <% f.hidden_field :spot_id %>
+    </div>
+    <script>
+    $('#star').empty();
+    $('#star').raty({
+      size     : 36,
+      starOff:  '<%= asset_path('star-off.png') %>',
+      starOn : '<%= asset_path('star-on.png') %>',
+  
+      scoreName: 'post[star]',
+      half: false,
+    });
+    </script>
+    <div>
+      <%= f.label "コメント"%><br />
+      <%= f.text_area :comment %>
+    </div>
+  
+    <div>
+      <%= f.submit "保存" %>
+    </div>
+  
+    <%= link_to "他のレビューを見る", public_spot_posts_path(spot) %>
 <% end %>

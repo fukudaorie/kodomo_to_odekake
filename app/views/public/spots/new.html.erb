@@ -14,7 +14,10 @@
           <% end %>
         </div>
       <% end %>
-
+      <%= form_with model: @spot, url: public_spots_path, local: true do |f| %>
+        <%= f.text_field :tag_ids, class: "form-control", id:'tag_ids',\
+            placeholder: "タグをつける。複数つけるには','で区切ってください。" %>
+        <% end %>
       <%= f.label "画像" %>
       <%= f.file_field :image, accept: "image/*" %><br />
 
@@ -54,4 +57,4 @@ function copyAddress() {
   return true;
 }
 </script>
-<script src = ENV['SECRET_KEY'] async defer></script>
+<script src ="https://maps.googleapis.com/maps/api/js?key=<%= ENV['SECRET_KEY'] %>&callback=initMap" async defer></script>

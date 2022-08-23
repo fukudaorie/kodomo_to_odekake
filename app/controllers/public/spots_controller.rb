@@ -6,14 +6,13 @@ class Public::SpotsController < ApplicationController
   def create
     @spot = Spot.new(spot_params)
     @spot.user = current_user
-    tag_list = params[:spot][:tag_ids]
+    tag_list = params[:spot][:tag_ids].split(',')
     if @spot.save
       @spot.save_tag(tag_list)
       redirect_to public_spot_path(@spot),notice:'投稿完了しました:)'
     else
       render:new
     end
-
   end
 
   def index
@@ -54,8 +53,24 @@ class Public::SpotsController < ApplicationController
     @post = Post.new
   end
 
+  def edit
+    @spot = Spot.find(params[:id])
+  end
+
+  def update
+    @spot = Spot.find(params[:id])
+    @spot.user = current_user
+    tag_list = params[:spot][:tag_ids]
+    if @spot.update(spot_params)
+      @spot.save_tag(tag_list)
+      redirect_to public_spot_path(@spot),notice:'投稿完了しました:)'
+    else
+      render:edit
+    end
+  end
+
   def destroy
-    @spot =Spot.find(params[:id])
+    @spot = Spot.find(params[:id])
     @spot.destroy
     redirect_to public_spots_path
   end
@@ -63,9 +78,6 @@ class Public::SpotsController < ApplicationController
   def map
     results = Geocoder.search(params[:address])
     @latlng = results.first.coordinates
-
-    results = Geocoder.search("東京タワー")
-    @latlng2 = results.first.coordinates
     # これでmap.js.erbで、経度緯度情報が入った@latlngを使える。
     # respond_to以下の記述によって、
     # remote: trueのアクセスに対して、
@@ -80,6 +92,6 @@ class Public::SpotsController < ApplicationController
   private
 
   def spot_params
-    params.require(:spot).permit(:image, :name, :address)
+    params.require(:spot).permit(:image, :name, :address, :keyword)
   end
 end

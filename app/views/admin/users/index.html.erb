@@ -1,0 +1,40 @@
+<div class = "container">
+  <h3>ユーザー一覧</h3>
+  <div class = "row">
+    <div class = "col-8 mx-auto">
+      <table class = "table">
+        <thead class = "table-secondary">
+          <tr>
+            <th class = "col-md-1">ID</th>
+            <th class = "col-md-2">ニックネーム</th>
+            <th class = "col-md-2">メールアドレス</th>
+            <th class = "col-md-2">ステータス</th>
+            <th class = "col-md-2"></th>
+          </tr>
+        </thead>
+        <% @users.each do |user| %>
+        <tbody>
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= link_to user.nickname, admin_spots_path(@spot) %></td>
+            <td><%= user.email %></td>
+            <td>
+              <% if user.is_delete %>
+              退会
+              <% else %>
+              有効
+              <% end %>
+            </td>
+            <td>
+              <% if user.email != "guest@example.com" %>
+              <%= link_to "ユーザー削除", admin_user_path(user), method: :delete, data: { confirm: "削除してよろしいですか?" } %>
+              <% end  %>
+              </td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </div>
+
+  </div>
+</div>

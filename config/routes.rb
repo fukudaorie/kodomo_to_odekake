@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   devise_for :users,skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
@@ -14,7 +15,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users, only: [:index, :destroy]
-    resources :spots, only: [:index]
+    resources :spots, only: [:index, :destroy]
+    resources :posts, only: [:index, :destroy]
   end
 
   namespace :public do

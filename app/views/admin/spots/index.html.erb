@@ -1,8 +1,18 @@
 <div class = "container">
+  <h3>スポット一覧</h3>
   <div class = "row">
-    <div class = "col">
+    
+    <div class = "col-md-6 mx-auto">
       <% @spots.each do |spot| %>
-      <%= spot.name %>
+      <div class = "card mb-2">
+      <h4><%= spot.name %></h4>
+      投稿者:<%= spot.user.nickname %><br />
+      場所  :<%= spot.address %><br />
+      タグ  :<% spot.tags.each do |tag| %>
+              <%= tag.name %>
+             <% end %>
+             <%= link_to "削除", admin_spot_path(spot), method: :delete %>
+      </div>
       <% end %>
     </div>
   </div>

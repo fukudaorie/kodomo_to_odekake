@@ -1,20 +1,20 @@
 <div class = "container">
   <div class = "row">
-    <div class = "col">ニックネーム</div>
-    <div class = "col"><%= @user.nickname %></div>
+    <div class = "col-md-2">ニックネーム</div>
+    <div class = "col-md-4"><%= @user.nickname %></div>
   </div>
   <div class = "row">
-    <div class = "col">メールアドレス</div>
-    <div class = "col"><%= @user.email %></div>
+    <div class = "col-md-2">メールアドレス</div>
+    <div class = "col-md-4"><%= @user.email %></div>
   </div>
   <% @user.children.each do |child| %>
     <div class = "row">
-      <div class = "col">性別</div>
-      <div class = "col"><%= child.sex_i18n %></div><br />
+      <div class = "col-md-2">性別</div>
+      <div class = "col-md-4"><%= child.sex_i18n %></div><br />
     </div>
     <div class = "row">
-      <div class = "col">年齢</div>
-      <div class = "col"><%= child.age %>歳</div><br />
+      <div class = "col-md-2">年齢</div>
+      <div class = "col-md-4"><%= child.age %>歳</div><br />
     </div>
   <% end %>
 

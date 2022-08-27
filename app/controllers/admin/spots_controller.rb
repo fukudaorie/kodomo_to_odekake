@@ -1,6 +1,12 @@
 class Admin::SpotsController < ApplicationController
   def index
-    @user = User.find(params[:id])
-    @spots = @user.spot
+    @spots = Spot.all
+  end
+
+  def destroy
+    @spot = Spot.find(params[:id])
+    @spot.destroy
+    flash[:notice] = "スポットが削除されました。"
+    redirect_to admin_spots_path
   end
 end

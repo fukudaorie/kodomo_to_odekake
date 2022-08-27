@@ -16,3 +16,8 @@ Tag.create([
   { name: '離乳食持ち込み可' },
   { name: '子供椅子有り' }
 ])
+
+Admin.create!(
+    email: "a@a",
+    password: "kanrisya"
+    )

@@ -16,7 +16,7 @@
         <tbody>
           <tr>
             <td><%= user.id %></td>
-            <td><%= link_to user.nickname, admin_spots_path(@spot) %></td>
+            <td><%= link_to user.nickname, admin_spot_path(user) %></td>
             <td><%= user.email %></td>
             <td>
               <% if user.is_delete %>

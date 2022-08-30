@@ -19,13 +19,6 @@ mapという変数があることに留意
     map: mapInstance,
     position: pos
   });
+  })()
   
-  let pos2 = new google.maps.LatLng(
-   <%= @latlng2[0] %>, //latitude
-   <%= @latlng2[1] %>  //longitude
-  );
-  let marker2 = new google.maps.Marker({
-    map: mapInstance,
-    position: pos2
-  });
-})()
+  

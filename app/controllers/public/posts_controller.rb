@@ -1,4 +1,6 @@
 class Public::PostsController < ApplicationController
+  before_action :authenticate_user!
+  
   def index
     @spot = Spot.find(params[:spot_id])
     @posts = @spot.posts

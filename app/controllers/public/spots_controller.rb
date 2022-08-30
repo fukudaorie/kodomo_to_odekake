@@ -1,4 +1,5 @@
 class Public::SpotsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :show]
   def new
     @spot = Spot.new
   end
@@ -6,7 +7,7 @@ class Public::SpotsController < ApplicationController
   def create
     @spot = Spot.new(spot_params)
     @spot.user = current_user
-    tag_list = params[:spot][:tag_ids].split(',')
+    tag_list = params[:spot][:tag_ids]
     if @spot.save
       @spot.save_tag(tag_list)
       redirect_to public_spot_path(@spot),notice:'投稿完了しました:)'
@@ -72,7 +73,7 @@ class Public::SpotsController < ApplicationController
   def destroy
     @spot = Spot.find(params[:id])
     @spot.destroy
-    redirect_to public_spots_path
+    redirect_to public_users_my_page_path
   end
 
   def map

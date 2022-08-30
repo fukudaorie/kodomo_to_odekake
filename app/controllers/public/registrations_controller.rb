@@ -67,6 +67,10 @@ class Public::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 
+  def after_sign_in_path_for(resource)
+      public_users_my_page_path
+  end
+
   private
 
   def user_params

@@ -17,7 +17,7 @@ Tag.create([
   { name: '子供椅子有り' }
 ])
 
-Admin.create!(
+Admin.create(
     email: "a@a",
-    password: "kanrisya"
+    password: "aaaaaa"
     )

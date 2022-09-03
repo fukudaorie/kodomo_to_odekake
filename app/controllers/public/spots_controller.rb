@@ -1,5 +1,5 @@
 class Public::SpotsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :show]
+  before_action :authenticate_user!, only: [:new, :create]
   def new
     @spot = Spot.new
   end
@@ -10,7 +10,7 @@ class Public::SpotsController < ApplicationController
     tag_list = params[:spot][:tag_ids]
     if @spot.save
       @spot.save_tag(tag_list)
-      redirect_to public_spot_path(@spot),notice:'投稿完了しました:)'
+      redirect_to public_spot_path(@spot),notice:'投稿完了しました'
     else
       render:new
     end
@@ -51,6 +51,8 @@ class Public::SpotsController < ApplicationController
 
   def show
     @spot = Spot.find(params[:id])
+    results = Geocoder.search(@spot.address)
+    @latlng = results.first.coordinates
     @post = Post.new
   end
 
@@ -64,7 +66,7 @@ class Public::SpotsController < ApplicationController
     tag_list = params[:spot][:tag_ids]
     if @spot.update(spot_params)
       @spot.save_tag(tag_list)
-      redirect_to public_spot_path(@spot),notice:'投稿完了しました:)'
+      redirect_to public_spot_path(@spot),notice:'投稿完了しました'
     else
       render:edit
     end

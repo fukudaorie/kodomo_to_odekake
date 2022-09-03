@@ -1,4 +1,5 @@
 class Public::FavoritesController < ApplicationController
+  before_action :authenticate_user!
   def create
     @favorite = current_user.favorites.new(user_id: current_user.id, spot_id: params[:spot_id])
     @favorite.save

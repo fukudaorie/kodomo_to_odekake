@@ -13,25 +13,24 @@
       <% end %><br />
       <% if @spot.user.is_delete == false %>
         <%= @spot.user.nickname %>さん<br />
-        <% @spot.user.children.each do |child| %>
-          <%= child.age %>歳<%= child.sex_i18n %>
-        <% end %>
       <% else %>
         退会済ユーザー
       <% end %>
-      <% if current_user != User.guest %>
-        <% if @spot.favorited_by?(current_user) %>
-          <p>
-          <%= link_to public_spot_favorites_path(@spot), method: :delete do %>
-           ♥<%= @spot.favorites.count %> いいね
+      <% if current_user != nil %>
+        <% if current_user != User.guest %>
+          <% if @spot.favorited_by?(current_user) %>
+            <p>
+            <%= link_to public_spot_favorites_path(@spot), method: :delete do %>
+             ♥<%= @spot.favorites.count %> いいね
+            <% end %>
+            </p>
+          <% else %>
+            <p>
+            <%= link_to public_spot_favorites_path(@spot), method: :post do %>
+            ♡<%= @spot.favorites.count %> いいね
+            <% end %>
+            </p>
           <% end %>
-          </p>
-        <% else %>
-          <p>
-          <%= link_to public_spot_favorites_path(@spot), method: :post do %>
-          ♡<%= @spot.favorites.count %> いいね
-          <% end %>
-          </p>
         <% end %>
       <% end %>
     </div>
@@ -52,11 +51,17 @@
 </style>
 
 <script>
+let mapInstanceshow
 function initMap(){
-  let map = new google.maps.Map(document.getElementById('map'), {
-  center: {lat: -34.397, lng: 150.644},
+  mapInstanceshow = new google.maps.Map(document.getElementById('map'), {
+  center: {lat: <%= @latlng[0] %>, lng: <%= @latlng[1] %>},
   zoom: 8
   });
+
+let myMarker = new google.maps.Marker({
+position: {lat: <%= @latlng[0] %>, lng: <%= @latlng[1] %>},
+map: mapInstanceshow
+});
 }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['SECRET_KEY'] %>&callback=initMap" async defer></script>

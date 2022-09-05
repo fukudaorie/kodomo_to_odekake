@@ -8,6 +8,8 @@ mapという変数があることに留意
 */
 
 (function(){
+  $("#err-msg").text("<%= @err_msg %>")
+
   // 位置情報をもつ変数を用意
   let pos = new google.maps.LatLng(
    <%= @latlng[0] %>, //latitude
@@ -20,5 +22,4 @@ mapという変数があることに留意
     position: pos
   });
   })()
-  
-  
+

@@ -5,7 +5,7 @@ class Spot < ApplicationRecord
   has_many :tags, through: :spot_tag_relations, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_one_attached :image
-
+  
   def save_tag(tag_list)
     if !tags.nil?
       spot_tag_relations_records = SpotTagRelation.where(spot_id: id)

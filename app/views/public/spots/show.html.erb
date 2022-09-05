@@ -1,67 +1,81 @@
 <div class = "container">
-  <h3><%= @spot.name %></h3>
+  <h3 class = "mb-3"><%= @spot.name %></h3>
+  <div class = "text-right">
   <% if @spot.user == current_user && @spot.user.email != 'guest@example.com' %>
-  <%= link_to "編集", edit_public_spot_path(@spot) %>
-  <%= link_to "削除", public_spot_path(@spot), method: :delete %>
+  <%= link_to "編集", edit_public_spot_path(@spot), class: "btn btn-primary" %>
+  <%= link_to "削除", public_spot_path(@spot), method: :delete, class: "btn btn-danger" %>
   <% end %>
-  <div class = "row">
-    <div class = "col">
+  </div>
+  <div class = "row ">
+    <div class = "col-md-3 offset-md-2 pt-5">
+      <div class = "text-right">
       <% if @spot.image.attached? %>
         <%= image_tag @spot.image, size: "200x200" %>
       <% else %>
         <%= image_tag 'no_image', size: "200x200" %>
       <% end %><br />
-      <% if @spot.user.is_delete == false %>
-        <%= @spot.user.nickname %>さん<br />
-      <% else %>
-        退会済ユーザー
-      <% end %>
       <% if current_user != nil %>
         <% if current_user != User.guest %>
           <% if @spot.favorited_by?(current_user) %>
-            <p>
             <%= link_to public_spot_favorites_path(@spot), method: :delete do %>
              ♥<%= @spot.favorites.count %> いいね
             <% end %>
-            </p>
           <% else %>
-            <p>
             <%= link_to public_spot_favorites_path(@spot), method: :post do %>
             ♡<%= @spot.favorites.count %> いいね
             <% end %>
-            </p>
           <% end %>
         <% end %>
+      <% end %><br />
+      <% if @spot.user.is_delete == false %>
+        <%= @spot.user.nickname %>さん<br />
+        <% @spot.user.children.each do |child| %>
+          <%= child.age %>歳
+          <%= child.sex_i18n %><br />
+        <% end %>
+      <% else %>
+        退会済ユーザー
+      <% end %>
+      </div>
+    </div>
+    <div class = "col-md-2 mt-5">
+      タグ<br />
+      <% @spot.tags.each do |tag| %>
+        <span>#<%= tag.name %></span><br />
       <% end %>
     </div>
-    <div class = "col">
-      <% @spot.tags.each do |tag| %>
-        <span><%= tag.name %></span><br />
-      <% end %>
-      <%= @spot.address %>
+    <div class = "col-md-4">
+      <h5><%= @spot.address %></h5>
+
+    <div id='map'></div>
+    <style>
+    #map{
+      height: 300px;
+    }
+    </style>
     </div>
   </div>
-  <%= render 'public/spots/form', post: @post, spot: @spot %>
+  <div class = "row">
+    <div class = "offset-md-3">
+      <h5>レビューをかく</h5>
+      <%= render 'public/spots/form', post: @post, spot: @spot %>
+      </div>
+  </div>
 </div>
-<div id='map'></div>
-<style>
-#map{
-  height: 400px;
-}
-</style>
 
-<script>
-let mapInstanceshow
-function initMap(){
-  mapInstanceshow = new google.maps.Map(document.getElementById('map'), {
-  center: {lat: <%= @latlng[0] %>, lng: <%= @latlng[1] %>},
-  zoom: 8
-  });
+    <script>
+    let mapInstanceshow
+    function initMap(){
+      mapInstanceshow = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: <%= @latlng[0] %>, lng: <%= @latlng[1] %>},
+      zoom: 8
+      });
 
-let myMarker = new google.maps.Marker({
-position: {lat: <%= @latlng[0] %>, lng: <%= @latlng[1] %>},
-map: mapInstanceshow
-});
-}
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['SECRET_KEY'] %>&callback=initMap" async defer></script>
+    let myMarker = new google.maps.Marker({
+    position: {lat: <%= @latlng[0] %>, lng: <%= @latlng[1] %>},
+    map: mapInstanceshow
+    });
+    }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['SECRET_KEY'] %>&callback=initMap" async defer></script>
+

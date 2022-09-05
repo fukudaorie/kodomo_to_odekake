@@ -1,2 +1,47 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div class = "container">
+  <div class = "row">
+    <h3 class = "mx-auto mb-5">スポット一覧</h3>
+  </div>
+  <div class = "row">
+    <div class = "col-md-4">
+      <%= form_tag({controller:"spots",action:"index"}, method: :get) do %>
+        <%= label_tag :keyword, "検索" %><%= text_field_tag :keyword, params[:keyword] %><br />
+        <% Tag.all.each do |t| %>
+          <%= check_box :tag_ids, t.name %><%= t.name %><br />
+        <% end %>
+          <%= submit_tag '検索' %>
+      <% end %>
+    </div>
+    <div class = "col-md-7">
+      <div class = "row">
+      <% @spots.each do |spot| %>
+      <div class = "col-md-5 mr-1 mb-3">
+      <%= link_to public_spot_path(spot) do %>
+      <%= spot.name %><br />
+      <% if spot.image.attached? %>
+        <%= image_tag spot.image, size: "70x70" %>
+      <% else %>
+        <%= image_tag 'no_image', size: "70x70" %>
+      <% end %>
+      <% end %>
+        <div id ="average-star-rating<%= spot.id %>"></div>
+        <%= link_to public_spot_posts_path(spot) do %>
+        <%= spot.avg_star %>点（<%= spot.posts.count %>件のレビュー）
+        <% end %>
+        <script>
+          $('#average-star-rating<%= spot.id %>').empty();
+          $('#average-star-rating<%= spot.id %>').raty({
+            starOn: "<%= asset_path('star-on.png') %>",
+            starOff: "<%= asset_path('star-off.png') %>",
+            starHalf: "<%= asset_path('star-half.png') %>",
+            readOnly: true,
+            score: <%= spot.avg_star %>
+          });
+        </script>
+       
+      </div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>

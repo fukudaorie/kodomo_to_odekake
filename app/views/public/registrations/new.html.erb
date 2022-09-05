@@ -1,45 +1,62 @@
 <div class = "container">
-<h2>新規登録</h2>
+<h3 class = "mb-3">新規登録</h3>
 <%  @user.children.build %>
 <%= form_with model: @user, url: user_registration_path do |s| %>
   <%= render "public/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= s.label "ニックネーム" %><br>
-    <%= s.text_field :nickname %>
-  </div>
-   <div class="users">
-        <%= s.fields_for :children do |t| %>
-            <%= render "child_fields", f: t %>
-        <% end %>
-        <div class="links">
-            <%= link_to_add_association "子供を追加", s, :children %>
-        </div>
+  <div class="row mb-3">
+    <div class = "col-md-2 offset-md-3">
+      <%= s.label "ニックネーム" %><br />
     </div>
-
-
-  <div class="field">
-    <%= s.label "メールアドレス" %><br />
-    <%= s.email_field :email, autofocus: true, autocomplete: "email" %>
+    <div class = "col">
+      <%= s.text_field :nickname, autofocus: true, autocomplete: "nickname", class: "form-control col-md-5" %>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class = "col-md-2 offset-md-3">
+      お子様
+    </div>
+    <div class = "col">
+      <%= s.fields_for :children do |t| %>
+        <%= render "child_fields", f: t %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association "子供を追加", s, :children %>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class = "col-md-2 offset-md-3">
+      <%= s.label "メールアドレス" %>
+    </div>
+    <div class = "col">
+      <%= s.email_field :email, autofocus: true, autocomplete: "email", class: "form-control col-md-5" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= s.label "パスワード" %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %>文字以上)</em>
-    <% end %><br />
-    <%= s.password_field :password, autocomplete: "new-password" %>
+  <div class = "row mb-3">
+    <div class = "col-md-2 offset-md-3">
+      <%= s.label "パスワード" %><br />
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %>文字以上)</em>
+      <% end %><br />
+    </div>
+    <div class = "col">
+      <%= s.password_field :password, autocomplete: "new-password", class: "form-control col-md-5" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= s.label "パスワード(確認用)" %><br />
-    <%= s.password_field :password_confirmation, autocomplete: "new-password" %>
+  <div class = "row mb-3">
+    <div class = "col-md-2 offset-md-3">
+      <%= s.label "パスワード(確認用)" %><br />
+    </div>
+    <div class = "col">
+      <%= s.password_field :password_confirmation, autocomplete: "new-password", class: "form-control col-md-5" %>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= s.submit "新規登録" %>
+  <div class = "row">
+    <div class = "offset-md-5">
+      <%= s.submit "新規登録", class: "btn btn-primary pr-5 pl-5 mb-3" %>
+    </div>
   </div>
 <% end %>
-
-<%= render "public/shared/links" %>
-</div
+</div>

@@ -22,7 +22,8 @@
         <%= image_tag spot.image, size: "70x70" %>
       <% else %>
         <%= image_tag 'no_image', size: "70x70" %>
-      <% end %>
+      <% end %><br />
+      <%= spot.address %>
       <% end %>
         <div id ="average-star-rating<%= spot.id %>"></div>
         <%= link_to public_spot_posts_path(spot) do %>

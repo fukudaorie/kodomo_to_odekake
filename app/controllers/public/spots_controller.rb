@@ -80,8 +80,16 @@ class Public::SpotsController < ApplicationController
 
   def map
     results = Geocoder.search(params[:address])
-    @latlng = results.first.coordinates
-    # これでmap.js.erbで、経度緯度情報が入った@latlngを使える。
+
+    if results.present?
+      @latlng = results.first.coordinates
+      # これでmap.js.erbで、経度緯度情報が入った@latlngを使える。
+      @err_msg = "住所を取得出来ました。"
+    else
+      @latlng = [-34.397, 150.644]
+      @err_msg = "住所を取得出来ませんでした。"
+    end
+
     # respond_to以下の記述によって、
     # remote: trueのアクセスに対して、
     # map.js.erbが変えるようになります。

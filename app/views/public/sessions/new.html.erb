@@ -3,7 +3,7 @@
 
 <%= form_with model: @user, url: user_session_path do |f| %>
   <div class= "row mb-3">
-      <div class = "col-md-2 offset-md-1">
+      <div class = "col-md-2 offset-md-3">
         <%= f.label "メールアドレス" %>
       </div>
       <div class = "col">
@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class = "row mb-3">
-      <div class = "col-md-2 offset-md-1">
+      <div class = "col-md-2 offset-md-3">
         <%= f.label "パスワード" %>
       </div>
       <div class = "col">
@@ -19,15 +19,16 @@
       </div>
     </div>
     <div class = "row">
-      <div class = "offset-md-3">
-        <%= f.submit "ログイン", class: "btn btn-primary pr-5 pl-5" %>
+      <div class = "offset-md-5">
+        <%= f.submit "ログイン", class: "btn btn-primary pr-5 pl-5 mb-3" %>
       </div>
     </div>
 <% end %>
-
-<p class = "ml-3">会員登録がお済みでない方</p>
 <div class = "row">
-  <div class = "offset-md-1">
+  <div class = "offset-md-3 mb-3">会員登録がお済みでない方</div>
+</div>
+<div class = "row">
+  <div class = "offset-md-3">
     <%= link_to "新規登録", new_registration_path(resource_name), class: "btn btn-success pr-5 pl-5 ml-5" %>
   </div>
   <div class = "col-md-3 offset-md-1">

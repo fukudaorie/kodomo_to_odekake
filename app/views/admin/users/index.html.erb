@@ -16,7 +16,7 @@
         <tbody>
           <tr>
             <td><%= user.id %></td>
-            <td><%= link_to user.nickname, admin_spot_path(user) %></td>
+            <td><%= user.nickname %></td>
             <td><%= user.email %></td>
             <td>
               <% if user.is_delete %>
@@ -35,6 +35,6 @@
         <% end %>
       </table>
     </div>
-
   </div>
+  <%= paginate @users %>
 </div>

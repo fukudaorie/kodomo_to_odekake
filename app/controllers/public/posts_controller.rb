@@ -1,5 +1,5 @@
 class Public::PostsController < ApplicationController
-  before_action :authenticate_user!, only: [:create]
+  before_action :authenticate_user!, only: [:create, :destroy]
 
   def index
     @spot = Spot.find(params[:spot_id])
@@ -11,6 +11,14 @@ class Public::PostsController < ApplicationController
     @post.spot_id = params[:spot_id]
     @post.user_id = current_user.id
     @post.save
+    redirect_to public_spot_posts_path
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @post.spot_id = params[:spot_id]
+    @post.user_id = current_user.id
+    @post.destroy
     redirect_to public_spot_posts_path
   end
 

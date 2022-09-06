@@ -54,4 +54,4 @@ function copyAddress() {
   return true;
 }
 </script>
-<script src = ENV['SECRET_KEY'] async defer></script>
+<script src ="https://maps.googleapis.com/maps/api/js?key=<%= ENV['SECRET_KEY'] %>&callback=initMap" async defer></script>

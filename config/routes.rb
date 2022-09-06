@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   namespace :public do
     root to: 'homes#top'
     resources :spots do
-      resources :posts, only: [:index, :create]
+      resources :posts, only: [:index, :create, :destroy]
       resource :favorites, only: [:create, :destroy, :index]
     end
     get '/map_request', to: 'spots#map', as: 'map_request'

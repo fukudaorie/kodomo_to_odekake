@@ -1,13 +1,11 @@
 <div class = "container">
-  <div class = "row">
-  <h3 class = "mx-auto mb-5">スポット一覧</h3>
-    </div>
+  <h3>スポット一覧</h3>
   <div class = "row">
     <div class = "col-md-4">
       <%= form_tag({controller:"spots",action:"index"}, method: :get) do %>
         <%= label_tag :keyword, "検索" %><%= text_field_tag :keyword, params[:keyword] %><br />
         <% Tag.all.each do |t| %>
-          <%= check_box :tag_ids, t.name %><%= t.name %><br />
+          <%= check_box :tag_ids, t.id %><%= t.name %><br />
         <% end %>
           <%= submit_tag '検索' %>
       <% end %>
@@ -23,7 +21,7 @@
       <% else %>
         <%= image_tag 'no_image', size: "70x70" %>
       <% end %><br />
-      <%= spot.address %>
+      場所:<%= spot.address %>
       <% end %>
         <div id ="average-star-rating<%= spot.id %>"></div>
         <%= link_to public_spot_posts_path(spot) do %>
@@ -44,4 +42,5 @@
       </div>
     </div>
   </div>
+  <%= paginate @spots %>
 </div>

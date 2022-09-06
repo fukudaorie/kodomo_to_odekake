@@ -17,7 +17,7 @@ class Public::SpotsController < ApplicationController
   end
 
   def index
-    @spots = Spot.all
+    @spots = Spot.all.page(params[:page]).per(10)
     if params[:keyword] || (params[:tag_ids] && params[:tag_ids].values.include?("1"))
 
       filtered_spots = []
@@ -28,7 +28,7 @@ class Public::SpotsController < ApplicationController
         end
         filtered_spots.flatten!
       else
-        filtered_spots = Spot.all
+        filtered_spots = Spot.page(params[:page]).per(10)
       end
       check_filtered_spots = []
       if params[:tag_ids].values.include?("1")
@@ -41,9 +41,10 @@ class Public::SpotsController < ApplicationController
             check_filtered_spots << spot if check_lists.include?(tag.name)
           end
         end
-        @spots = check_filtered_spots.uniq
+        @spots = Spot.where(id: SpotTagRelation.where(tag_id: check_lists).pluck(:spot_id)).page(params[:page]).per(10)
       else
-        @spots = filtered_spots
+        @spots = Spot.all.page(params[:page]).per(10)
+
       end
     end
 

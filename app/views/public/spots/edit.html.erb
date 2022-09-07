@@ -1,10 +1,10 @@
 <div class = "container">
-  <h3><%= @spot.name %>を編集する</h3>
+  <h3 class = "mb-3"><%= @spot.name %>を編集する</h3>
   <div class = "row">
-    <div class = "col">
+    <div class = "col-md-4 offset-md-2">
       <%= form_with model: @spot, url: public_spot_path(@spot), local: true do |f| %>
       <%= f.label "名前" %>
-      <%= f.text_field :name %><br />
+      <%= f.text_field :name, required: true, autofocus: true, autocomplete: "name", class: "form-control col-md-8" %><br />
 
       <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
         <div class='form-check'>
@@ -19,15 +19,16 @@
       <%= f.file_field :image, accept: "image/*" %><br />
 
       <%= f.label "場所" %>
-      <%= f.text_field :address %><br />
+      <%= f.text_field :address, required: true, autofocus: true, autocomplete: "address", class: "form-control col" %><br />
 
       <%= f.submit "編集する" %>
       <% end %>
     </div>
     <div class = "col">
-      <%= form_with url: public_map_request_path, method: :get, local: false do |f|%>
+      <%= form_with url: public_map_request_path, method: :get, local: false do |f| %>
         <%= f.hidden_field :address %>
         <%= f.submit '地図表示で確認してみる', :onclick => "return copyAddress()" %>
+        <span id="err-msg"></span>
       <% end %>
       <br />
       <div id='map'></div>

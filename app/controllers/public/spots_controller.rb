@@ -47,13 +47,17 @@ class Public::SpotsController < ApplicationController
 
       end
     end
-
   end
 
   def show
     @spot = Spot.find(params[:id])
     results = Geocoder.search(@spot.address)
-    @latlng = results.first.coordinates
+    #byebug
+    if results.any?
+      @latlng = results.first.coordinates
+    else
+      @latlng = []
+    end
     @post = Post.new
   end
 
@@ -81,13 +85,14 @@ class Public::SpotsController < ApplicationController
 
   def map
     results = Geocoder.search(params[:address])
+    #byebug
 
     if results.present?
       @latlng = results.first.coordinates
       # これでmap.js.erbで、経度緯度情報が入った@latlngを使える。
       @err_msg = "住所を取得出来ました。"
     else
-      @latlng = [-34.397, 150.644]
+      @latlng = []
       @err_msg = "住所を取得出来ませんでした。"
     end
 

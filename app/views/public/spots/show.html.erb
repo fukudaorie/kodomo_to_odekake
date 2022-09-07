@@ -46,7 +46,9 @@
     </div>
     <div class = "col-md-4">
       <h5><%= @spot.address %></h5>
-
+      <% if @latlng.empty? %>
+        地図では取得できませんでした。
+      <% end %>
     <div id='map'></div>
     <style>
     #map{

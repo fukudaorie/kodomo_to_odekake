@@ -1,7 +1,7 @@
 <div class = "container">
   <h3 class = "mb-3"><%= @spot.name %></h3>
   <div class = "text-right">
-  <% if @spot.user == current_user && @spot.user.email != 'guest@example.com' %>
+  <% if @spot.user == current_user && @spot.user != User.guest %>
   <%= link_to "編集", edit_public_spot_path(@spot), class: "btn btn-primary" %>
   <%= link_to "削除", public_spot_path(@spot), method: :delete, class: "btn btn-danger" %>
   <% end %>
@@ -22,11 +22,11 @@
             <% end %>
           <% else %>
             <%= link_to public_spot_favorites_path(@spot), method: :post do %>
-            ♡<%= @spot.favorites.count %> いいね
+            ♡<%= @spot.favorites.count %> いいね<br />
             <% end %>
           <% end %>
         <% end %>
-      <% end %><br />
+      <% end %>
       <% if @spot.user.is_delete == false %>
         <%= @spot.user.nickname %>さん<br />
         <% @spot.user.children.each do |child| %>

@@ -44,7 +44,6 @@ class Public::SpotsController < ApplicationController
         @spots = Spot.where(id: SpotTagRelation.where(tag_id: check_lists).pluck(:spot_id)).page(params[:page]).per(10)
       else
         @spots = Spot.all.page(params[:page]).per(10)
-
       end
     end
   end

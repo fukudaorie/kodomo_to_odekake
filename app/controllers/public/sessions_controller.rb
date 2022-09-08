@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
-  
+
   def new_guest
     user = User.guest
     sign_in user
     redirect_to public_users_my_page_path, notice: 'ゲストユーザーとしてログインしました。'
   end
-  
+
   before_action :user_state, only: [:create]
 
   # before_action :configure_sign_in_params, only: [:create]
-  
+
   # GET /resource/sign_in
   # def new
   #   super
@@ -30,11 +30,11 @@ class Public::SessionsController < Devise::SessionsController
   protected
 
   def after_sign_in_path_for(resource)
-      public_spots_path
+      public_users_my_page_path
   end
 
   def after_sign_out_path_for(resource)
-      public_spots_path
+      public_root_path
   end
 
   # If you have extra params to permit, append them to the sanitizer.

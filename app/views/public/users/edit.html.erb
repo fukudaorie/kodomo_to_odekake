@@ -15,9 +15,9 @@
       お子様
     </div>
     <div class = "col">
-      <%= s.fields_for :children do |t| %>
-        <%= render partial: "public/registrations/child_fields", locals: { f: t } %>
-      <% end %>
+      <%#= s.fields_for :children do |t| %>
+        <%#= render partial: "public/registrations/child_fields", locals: { f: t } %>
+      <%# end %>
       <div class="links">
         <%= link_to_add_association "子供を追加", s, :children, partial: "public/registrations/child_fields"%>
       </div>
@@ -36,7 +36,7 @@
       <%= s.submit "編集内容を保存", class: "btn btn-success pr-5 pl-5 ml-5" %>
     </div>
     <div class = "col-md-3 offset-md-1">
-      <%= link_to "退会する", withdraw_public_users_path, method: :patch, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger pr-4 pl-4" %>
+      <%= link_to "退会する", withdraw_public_users_path, method: :patch, "data-confirm" => "本当に退会しますか？", class: "btn btn-danger pr-4 pl-4" %>
     </div>
   </div>
   <% end %>

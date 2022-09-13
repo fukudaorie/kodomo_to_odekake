@@ -14,7 +14,11 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    resources :users, only: [:index, :destroy]
+    resources :users, only: [:index, :update] do
+      member do
+        patch :withdraw
+      end
+    end
     resources :spots, only: [:index, :destroy]
     resources :posts, only: [:index, :destroy]
   end

@@ -3,7 +3,7 @@ class Public::PostsController < ApplicationController
 
   def index
     @spot = Spot.find(params[:spot_id])
-    @posts = @spot.posts.page(params[:page])
+    @posts = @spot.posts.order('id DESC').page(params[:page])
   end
 
   def create

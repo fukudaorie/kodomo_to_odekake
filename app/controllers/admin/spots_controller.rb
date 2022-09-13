@@ -1,7 +1,7 @@
 class Admin::SpotsController < ApplicationController
   before_action :authenticate_admin!
   def index
-    @spots = Spot.page(params[:page]).per(10)
+    @spots = Spot.order('id DESC').page(params[:page]).per(10)
   end
 
   def destroy

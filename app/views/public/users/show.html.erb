@@ -24,9 +24,8 @@
           <div class = "col-md-4"><%= child.age %>歳</div><br />
         </div>
       <% end %>
-
       <%= link_to "編集", edit_public_user_path(current_user), class: "btn btn-success ml-5" %>
-      <%= link_to "投稿する", new_public_spot_path, class: "btn btn-primary" %>
+      <%= link_to "投稿", new_public_spot_path, class: "btn btn-primary" %>
     </div>
     <div class = "col">
       <% if @user != User.guest %>

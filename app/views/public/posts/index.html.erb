@@ -2,13 +2,18 @@
   <h3 class = "mb-3"><%= @spot.name %>の口コミ一覧</h3>
   <div class = "row">
     <div class = "col-md-6 mx-auto">
-    <%= link_to '口コミを投稿する', public_spot_path(@spot) %>
+      <% if current_user.present? %>
+        <% if current_user != User.guest %>
+          <%= link_to '口コミを投稿する', public_spot_path(@spot) %>
+        <% end %>
+      <% end %>
     <% @posts.each do |post| %>
       <div class = "card mb-3">
         <p>内容 :<%= post.comment %></p>
         <p>評価 :<%= post.star %>点</p>
         <div id="star-rate<%= post.id %>"></div>
         <script>
+          $('#star-rate<%= post.id %>').empty();
           $('#star-rate<%= post.id %>').raty({
             size      : 36,
             starOff   : '<%= asset_path('star-off.png') %>',
@@ -19,7 +24,11 @@
           });
         </script>
         投稿日 :<%= post.created_at.strftime('%Y/%m/%d') %><br />
-        投稿書 :<%= post.user.nickname %>
+        投稿書 :<% if post.user.is_delete == false %>
+                  <%= post.user.nickname %>
+                <% else %>
+                  退会済ユーザー
+                <% end %>
         <div class = "mx-auto">
           <% if post.user != User.guest && post.user == current_user %>
             <%= link_to "削除", public_spot_post_path(post.spot_id, post.id), method: :delete, class: "btn btn-danger" %>

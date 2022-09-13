@@ -1,13 +1,13 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_admin!
   def index
-    @users = User.all.page(params[:page]).per(10)
+    @users = User.all.order('id DESC').page(params[:page]).per(10)
   end
 
-  def destroy
+  def withdraw
     @user = User.find(params[:id])
-    @user.destroy
-    flash[:notice] = "ユーザーが削除されました。"
-    redirect_to public_users_path
+    @user.update(is_delete: true)
+    flash[:notice] = "退会処理を実行いたしました"
+    redirect_to admin_users_path
   end
 end

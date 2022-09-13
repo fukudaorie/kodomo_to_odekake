@@ -1,7 +1,9 @@
 class Public::UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :destroy]
+  
   def show
     @user = current_user
-    @spots = @user.spots.page(params[:page]).per(5)
+    @spots = @user.spots.order('id DESC').page(params[:page]).per(5)
   end
 
   def edit
@@ -10,7 +12,7 @@ class Public::UsersController < ApplicationController
 
   def update
     if current_user == User.guest
-      redirect_to public_spots_path, alert: 'ゲストユーザーの編集はできません。'
+      redirect_to public_users_my_page_path, alert: 'ゲストユーザーの編集はできません。'
     elsif @user = User.find(params[:id])
       @user.update(user_params)
       redirect_to public_users_my_page_path
@@ -20,8 +22,8 @@ class Public::UsersController < ApplicationController
   end
 
   def withdraw
-    if current_user.email == 'guest@example.com'
-      redirect_to public_spots_path, alert: 'ゲストユーザーの退会はできません。'
+    if current_user == User.guest
+      redirect_to public_users_my_page_path, alert: 'ゲストユーザーの退会はできません。'
     else
       @user = current_user
       @user.update(is_delete: true)

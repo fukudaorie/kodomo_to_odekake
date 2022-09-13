@@ -26,8 +26,8 @@
               <% end %>
             </td>
             <td>
-              <% if user.email != "guest@example.com" %>
-              <%= link_to "ユーザー削除", admin_user_path(user), method: :delete, data: { confirm: "削除してよろしいですか?" } %>
+              <% if user != User.guest %>
+                <%= link_to "ユーザー削除", withdraw_admin_user_path(user), method: :patch, "data-confirm" => "本当に退会させますか？" %>
               <% end  %>
               </td>
           </tr>

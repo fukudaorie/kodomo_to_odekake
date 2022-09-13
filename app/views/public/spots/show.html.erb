@@ -18,7 +18,7 @@
         <% if current_user != User.guest %>
           <% if @spot.favorited_by?(current_user) %>
             <%= link_to public_spot_favorites_path(@spot), method: :delete do %>
-             ♥<%= @spot.favorites.count %> いいね
+             ♥<%= @spot.favorites.count %> いいね<br />
             <% end %>
           <% else %>
             <%= link_to public_spot_favorites_path(@spot), method: :post do %>
@@ -60,8 +60,16 @@
   <div class = "row">
     <div class = "offset-md-3">
       <h5>レビューをかく</h5>
-      <%= render 'public/spots/form', post: @post, spot: @spot %>
-      </div>
+      <% if current_user != nil %>
+        <% if current_user == User.guest %>
+          <div class = "bg-white">会員登録してレビューを書こう!</div>
+        <% else %>
+          <%= render 'public/spots/form', post: @post, spot: @spot %>
+        <% end %>
+      <% elsif current_user == nil %>
+        会員登録してレビューを書こう!
+      <% end %>
+    </div>
   </div>
 </div>
 

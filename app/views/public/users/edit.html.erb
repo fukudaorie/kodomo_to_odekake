@@ -15,9 +15,9 @@
       お子様
     </div>
     <div class = "col">
-      <%#= s.fields_for :children do |t| %>
-        <%#= render partial: "public/registrations/child_fields", locals: { f: t } %>
-      <%# end %>
+      <%= s.fields_for :children do |t| %>
+        <%= render partial: "public/registrations/child_fields", locals: { f: t } %>
+      <% end %>
       <div class="links">
         <%= link_to_add_association "子供を追加", s, :children, partial: "public/registrations/child_fields"%>
       </div>

@@ -1,6 +1,6 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy]
-  
+
   def show
     @user = current_user
     @spots = @user.spots.order('id DESC').page(params[:page]).per(5)
@@ -40,6 +40,6 @@ class Public::UsersController < ApplicationController
   private
 
   def user_params
-     params.require(:user).permit(:nickname, :email)
+     params.require(:user).permit(:nickname, :email, children_attributes: [:id, :sex, :birth_date,:_destroy])
   end
 end

@@ -8,6 +8,7 @@ class Public::UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @children = @user.children
   end
 
   def update
@@ -28,7 +29,7 @@ class Public::UsersController < ApplicationController
       @user = current_user
       @user.update(is_delete: true)
       reset_session
-      redirect_to public_root_path
+      redirect_to root_path, notice: '退会しました。'
     end
   end
 

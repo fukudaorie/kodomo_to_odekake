@@ -1,4 +1,6 @@
 class Child < ApplicationRecord
+  validates :sex, presence: true
+  validates :birth_date, presence: true
   belongs_to :user
 
   enum sex: { boy: 0, girl: 1 }

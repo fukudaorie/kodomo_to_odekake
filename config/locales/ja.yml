@@ -1,7 +1,18 @@
- ja:
-    enums:
-      child:
-        sex:
-          boy: "男の子"
-          girl: "女の子"
-
+ja:
+  enums:
+    child:
+      sex:
+        boy: "男の子"
+        girl: "女の子"
+  activerecord:
+    models:
+      user: "ユーザー"
+      child: "お子様"
+    attributes:
+        user:
+          password: "パスワード"
+          Password_confirmation: "確認用パスワード"
+    attributes:
+        child:
+          sex: "お子様の性別"
+          Children_birth_date: "お子様の生年月日"

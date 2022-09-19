@@ -91,7 +91,7 @@ class Public::SpotsController < ApplicationController
     tag_list = params[:spot][:tag_ids]
     if @spot.update(spot_params)
       @spot.save_tag(tag_list)
-      redirect_to public_spot_path(@spot),notice:'投稿完了しました'
+      redirect_to public_spot_path(@spot),notice:'編集完了しました'
     else
       render:edit
     end

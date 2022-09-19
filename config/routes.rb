@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    resources :users, only: [:index, :update] do
+    resources :users, only: [:index] do
       member do
         patch :withdraw
       end
@@ -24,7 +24,6 @@ Rails.application.routes.draw do
   end
 
   namespace :public do
-    root to: 'homes#top'
     resources :spots do
       resources :posts, only: [:index, :create, :destroy]
       resource :favorites, only: [:create, :destroy, :index]
@@ -39,6 +38,7 @@ Rails.application.routes.draw do
         get :favorites
       end
     end
-
   end
+
+  root to: 'public/homes#top'
 end

@@ -18,6 +18,6 @@ Tag.create([
 ])
 
 Admin.create(
-    email: "a@a",
-    password: "aaaaaa"
+    email: "kanrisya@example.com",
+    password: "kanrisya"
     )

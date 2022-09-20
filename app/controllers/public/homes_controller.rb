@@ -1,25 +1,35 @@
 class Public::HomesController < ApplicationController
   def top
-    first_expression = false
-
-    @spots = Spot.left_joins(:tags).all #for or
+     @spots = Spot.all.order('id DESC').page(params[:page]).per(6)
     if params[:keyword].present? || (params[:tag_ids] && params[:tag_ids].values.include?("1"))
-      if params[:keyword]
+
+      filtered_spots = []
+      if params[:keyword].present?
         split_keywords = params[:keyword].split(/[[:blank:]]+/)
         split_keywords.each do |keyword|
-          if first_expression == false
-            first_expression = true
-            @spots = @spots.where("spots.name LIKE '%#{keyword}%' OR spots.address LIKE '%#{keyword}%'")
-          else
-            @spots = @spots.or(Spot.where("spots.name LIKE '%#{keyword}%' OR spots.address LIKE '%#{keyword}%'"))
+          filtered_spots << Spot.where(['name LIKE(?) OR address LIKE(?)', "%#{keyword}%", "%#{keyword}%"])
+        end
+        filtered_spots.flatten!
+        filtered_spots_ids = filtered_spots.map { |spot| spot.id }
+        @spots = Spot.where(id: filtered_spots_ids).order('id DESC').page(params[:page]).per(6)
+      else
+        filtered_spots = Spot.all.order('id DESC').page(params[:page]).per(6)
+      end
+      check_filtered_spots = []
+      if params[:tag_ids].values.include?("1")
+        check_lists = []
+        params[:tag_ids].each do |key, value|
+          check_lists << key if value == "1"
+        end
+        filtered_spots.each do |spot|
+          spot.tags.each do |tag|
+            check_filtered_spots << spot if Tag.where(id: check_lists).pluck(:name).include?(tag.name)
           end
         end
-      end
-
-      params[:tag_ids].each do |key, value|
-        @spots = @spots.where(tags: {id: key}) if value == "1"
+        check_filtered_spots.flatten!
+        check_filtered_spots_ids = check_filtered_spots.map { |spot| spot.id }
+        @spots = Spot.where(id: check_filtered_spots_ids).order('id DESC').page(params[:page]).per(6)
       end
     end
-    @spots = @spots.order('spots.id DESC').page(params[:page]).per(6)
-  end 
+  end
 end

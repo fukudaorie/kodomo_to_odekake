@@ -7,12 +7,11 @@ ja:
   activerecord:
     models:
       user: "ユーザー"
-      child: "お子様"
+      children: "お子様"
     attributes:
         user:
           password: "パスワード"
-          Password_confirmation: "確認用パスワード"
     attributes:
-        child:
+        children:
           sex: "お子様の性別"
-          Children_birth_date: "お子様の生年月日"
+          birth_date: "お子様の生年月日"

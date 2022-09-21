@@ -46,7 +46,7 @@ class Public::SessionsController < Devise::SessionsController
     @user = User.find_by(email: params[:user][:email])
     return if !@user
     if @user.valid_password?(params[:user][:password]) && @user.is_delete == true
-      redirect_to new_user_registration_path
+      redirect_to new_user_registration_path,notice:'新規登録してください'
     end
   end
 end

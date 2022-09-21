@@ -31,11 +31,11 @@
       <% if @user != User.guest %>
         <h5><%= @user.nickname %>さんの投稿</h5>
         <% @spots.each do |spot| %>
-          <div class = "mb-3 offset-md-1">
+          <div class = "mb-3">
           <%= link_to public_spot_path(spot) do %>
             <div class = "card mb-2 col-md-8">
               <%= spot.created_at.strftime('%Y/%m/%d') %><br/>
-              <%= spot.name %><br />
+              名前:<%= spot.name %><br />
               場所:<%= spot.address %><br />
             </div>
           <% end %>

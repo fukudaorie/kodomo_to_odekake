@@ -21,7 +21,9 @@
 *行ってよかった、利用してよかった場所を投稿する時
 
 ## 設計書
-*[アプリケーション詳細設計書]()
+*[詳細設計書](https://docs.google.com/spreadsheets/d/16BiihjJWqXfLVzDskw52ScApVJPZx8LboOxxICLpIJ8/edit?usp=sharing)
+*[ER図](https://drive.google.com/file/d/10uB-6nRJde7dvKdwr-qQWvFl_CjdZQiC/view?usp=sharing)
+*[テーブル定義書](https://docs.google.com/spreadsheets/d/1dfbcBTxLc9nn49uBtbsYQk28kEv5EUQ7WD8ndu4RYkA/edit?usp=sharing)
 
 ## 開発環境
 - OS：Linux(CentOS)

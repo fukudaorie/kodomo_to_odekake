@@ -19,7 +19,7 @@
       <% if spot.image.attached? %>
         <%= image_tag spot.image, size: "70x70" %>
       <% else %>
-        <%= image_tag asset_path('no_image.jpg',  :alt => '画像', size: "70x70") %>
+        <%= image_tag asset_path('no_image.jpg'),  :alt => '画像', size: "70x70"　%>
       <% end %><br />
       場所:<%= spot.address %>
       <% end %>

@@ -12,7 +12,7 @@
       <% if @spot.image.attached? %>
         <%= image_tag @spot.image, size: "200x200" %>
       <% else %>
-        <%= image_tag asset_path('no_image.jpg'),  :alt => '画像', size: "200x200" %>
+        <%= image_tag asset_path('no_image.jpg'), :alt => '画像', size: "200x200" %>
       <% end %><br />
       <% if current_user != nil %>
         <% if current_user != User.guest %>

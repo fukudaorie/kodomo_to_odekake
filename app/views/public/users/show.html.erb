@@ -24,15 +24,15 @@
           <div class = "col-md-4"><%= child.age %>歳</div><br />
         </div>
       <% end %>
-      <%= link_to "編集", edit_public_user_path(current_user), class: "btn btn-success ml-5" %>
-      <%= link_to "投稿", new_public_spot_path, class: "btn btn-primary" %>
+      <%= link_to "編集", edit_user_path(current_user), class: "btn btn-success ml-5" %>
+      <%= link_to "投稿", new_spot_path, class: "btn btn-primary" %>
     </div>
     <div class = "col">
       <% if @user != User.guest %>
         <h5><%= @user.nickname %>さんの投稿</h5>
         <% @spots.each do |spot| %>
           <div class = "mb-3">
-          <%= link_to public_spot_path(spot) do %>
+          <%= link_to spot_path(spot) do %>
             <div class = "card mb-2 col-md-8">
               <%= spot.created_at.strftime('%Y/%m/%d') %><br/>
               名前:<%= spot.name %><br />

@@ -30,13 +30,13 @@
             <ul class="navbar-nav ml-auto">
               <% if user_signed_in? %>
               <li class="nav-item mr-4">
-                <%= link_to "マイページ", public_users_my_page_path, class: 'nav-link btn btn-outline-warning' %>
+                <%= link_to "マイページ", users_my_page_path, class: 'nav-link btn btn-outline-warning' %>
               </li>
               <li class="nav-item mr-4">
-                <%= link_to "スポット一覧", public_spots_path, class: 'nav-link btn btn-outline-warning' %>
+                <%= link_to "スポット一覧", spots_path, class: 'nav-link btn btn-outline-warning' %>
               </li>
               <li class="nav-item mr-4">
-                <%= link_to "お気に入り", favorites_public_user_path(current_user), class: 'nav-link btn btn-outline-warning' %>
+                <%= link_to "お気に入り", favorites_user_path(current_user), class: 'nav-link btn btn-outline-warning' %>
               </li>
               <li class="nav-item mr-4">
                 <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link btn btn-outline-warning' %>

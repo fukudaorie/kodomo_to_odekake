@@ -1,4 +1,4 @@
-<%= form_with model: [spot, post], url: public_spot_posts_path(spot), local: true do |f| %>
+<%= form_with model: [spot, post], url: spot_posts_path(spot), local: true do |f| %>
   <div class="field">
 
     <div class="form-group row" id="star">
@@ -26,5 +26,5 @@
       <%= f.submit "保存" %>
     </div>
 
-    <%= link_to "レビューを見る", public_spot_posts_path(spot), class: "bg-white" %>
+    <%= link_to "口コミを見る", spot_posts_path(spot), class: "bg-white" %>
 <% end %>

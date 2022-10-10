@@ -1,7 +1,7 @@
 <div class = "container">
   <h3 class = "mb-3">会員情報編集</h3>
   <% @user.children.build %>
-  <%= form_with model: @user, url: public_user_path(@user), method: :patch do |s| %>
+  <%= form_with model: @user, url: user_path(@user), method: :patch do |s| %>
   <div class="row mb-3">
     <div class = "col-md-2 offset-md-3">
       <%= s.label "ニックネーム" %><br />
@@ -38,7 +38,7 @@
       <%= s.submit "編集内容を保存", class: "btn btn-success pr-5 pl-5 ml-5" %>
     </div>
     <div class = "col-md-3 offset-md-1">
-      <%= link_to "退会する", withdraw_public_users_path, method: :patch, "data-confirm" => "本当に退会しますか？", class: "btn btn-danger pr-4 pl-4" %>
+      <%= link_to "退会する", withdraw_users_path, method: :patch, "data-confirm" => "本当に退会しますか？", class: "btn btn-danger pr-4 pl-4" %>
     </div>
   </div>
   <% end %>

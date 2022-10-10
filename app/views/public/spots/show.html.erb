@@ -2,8 +2,8 @@
   <h3 class = "mb-3"><%= @spot.name %></h3>
   <div class = "text-right">
   <% if @spot.user == current_user && @spot.user != User.guest %>
-  <%= link_to "編集", edit_public_spot_path(@spot), class: "btn btn-primary" %>
-  <%= link_to "削除", public_spot_path(@spot), method: :delete, class: "btn btn-danger" %>
+  <%= link_to "編集", edit_spot_path(@spot), class: "btn btn-primary" %>
+  <%= link_to "削除", spot_path(@spot), method: :delete, "data-confirm" => "投稿を削除しますか？", class: "btn btn-danger" %>
   <% end %>
   </div>
   <div class = "row ">
@@ -17,11 +17,11 @@
       <% if current_user != nil %>
         <% if current_user != User.guest %>
           <% if @spot.favorited_by?(current_user) %>
-            <%= link_to public_spot_favorites_path(@spot), method: :delete do %>
+            <%= link_to spot_favorites_path(@spot), method: :delete do %>
              ♥<%= @spot.favorites.count %> いいね<br />
             <% end %>
           <% else %>
-            <%= link_to public_spot_favorites_path(@spot), method: :post do %>
+            <%= link_to spot_favorites_path(@spot), method: :post do %>
             ♡<%= @spot.favorites.count %> いいね<br />
             <% end %>
           <% end %>
@@ -59,15 +59,15 @@
   </div>
   <div class = "row">
     <div class = "offset-md-3">
-      <h5>レビューをかく</h5>
+      <h5>口コミをかく</h5>
       <% if current_user != nil %>
         <% if current_user == User.guest %>
-          <div class = "bg-white">会員登録してレビューを書こう!</div>
+          <div class = "bg-white">会員登録して口コミを書こう!</div>
         <% else %>
           <%= render 'public/spots/form', post: @post, spot: @spot %>
         <% end %>
       <% elsif current_user == nil %>
-        会員登録してレビューを書こう!
+        会員登録して口コミを書こう!
       <% end %>
     </div>
   </div>

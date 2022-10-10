@@ -5,7 +5,7 @@ class Public::SessionsController < Devise::SessionsController
   def new_guest
     user = User.guest
     sign_in user
-    redirect_to public_users_my_page_path, notice: 'ゲストユーザーとしてログインしました。'
+    redirect_to users_my_page_path, notice: 'ゲストユーザーとしてログインしました。'
   end
 
   before_action :user_state, only: [:create]
@@ -30,11 +30,11 @@ class Public::SessionsController < Devise::SessionsController
   protected
 
   def after_sign_in_path_for(resource)
-      public_users_my_page_path
+    users_my_page_path
   end
 
   def after_sign_out_path_for(resource)
-      root_path
+    root_path
   end
 
   # If you have extra params to permit, append them to the sanitizer.

@@ -11,7 +11,7 @@ class Public::PostsController < ApplicationController
     @post.spot_id = params[:spot_id]
     @post.user_id = current_user.id
     @post.save
-    redirect_to public_spot_posts_path, notice:'口コミを投稿しました'
+    redirect_to spot_posts_path, notice:'口コミを投稿しました'
   end
 
   def destroy
@@ -19,7 +19,7 @@ class Public::PostsController < ApplicationController
     @post.spot_id = params[:spot_id]
     @post.user_id = current_user.id
     @post.destroy
-    redirect_to public_spot_posts_path, notice:'口コミを削除しました'
+    redirect_to spot_posts_path, notice:'口コミを削除しました'
   end
 
   private

@@ -68,7 +68,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # end
 
   def after_sign_in_path_for(resource)
-      public_users_my_page_path
+    users_my_page_path
   end
 
   private

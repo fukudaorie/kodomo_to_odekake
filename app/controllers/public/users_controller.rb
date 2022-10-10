@@ -9,14 +9,19 @@ class Public::UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
     @children = @user.children
+      if @user == current_user
+        render "edit"
+      else
+        redirect_to users_my_page_path
+      end
   end
 
   def update
     if current_user == User.guest
-      redirect_to public_users_my_page_path, alert: 'ゲストユーザーの編集はできません。'
+      redirect_to users_my_page_path, alert: 'ゲストユーザーの編集はできません。'
     elsif @user = User.find(params[:id])
       @user.update(user_params)
-      redirect_to public_users_my_page_path
+      redirect_to users_my_page_path
     else
       render :edit
     end
@@ -24,7 +29,7 @@ class Public::UsersController < ApplicationController
 
   def withdraw
     if current_user == User.guest
-      redirect_to public_users_my_page_path, alert: 'ゲストユーザーの退会はできません。'
+      redirect_to users_my_page_path, alert: 'ゲストユーザーの退会はできません。'
     else
       @user = current_user
       @user.update(is_delete: true)

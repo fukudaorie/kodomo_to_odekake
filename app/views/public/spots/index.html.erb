@@ -14,7 +14,7 @@
       <div class = "row">
       <% @spots.each do |spot| %>
       <div class = "col-md-5 mr-1 mb-3">
-      <%= link_to public_spot_path(spot) do %>
+      <%= link_to spot_path(spot) do %>
       <%= spot.name %><br />
       <% if spot.image.attached? %>
         <%= image_tag spot.image, size: "70x70" %>

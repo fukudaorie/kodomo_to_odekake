@@ -10,7 +10,7 @@ class Public::SpotsController < ApplicationController
     tag_list = params[:spot][:tag_ids]
     if @spot.save
       @spot.save_tag(tag_list)
-      redirect_to public_spot_path(@spot),notice:'投稿完了しました'
+      redirect_to spot_path(@spot),notice:'投稿完了しました'
     else
       render:new
     end
@@ -87,6 +87,15 @@ class Public::SpotsController < ApplicationController
 
   def edit
     @spot = Spot.find(params[:id])
+    if @spot.user == User.guest
+      redirect_to spots_path
+    else
+      if @spot.user == current_user
+        render "edit"
+      else
+        redirect_to spots_path
+      end
+    end
   end
 
   def update
@@ -95,7 +104,7 @@ class Public::SpotsController < ApplicationController
     tag_list = params[:spot][:tag_ids]
     if @spot.update(spot_params)
       @spot.save_tag(tag_list)
-      redirect_to public_spot_path(@spot),notice:'編集完了しました'
+      redirect_to spot_path(@spot),notice:'編集完了しました'
     else
       render:edit
     end
@@ -104,7 +113,7 @@ class Public::SpotsController < ApplicationController
   def destroy
     @spot = Spot.find(params[:id])
     @spot.destroy
-    redirect_to public_users_my_page_path, notice:'投稿を削除しました'
+    redirect_to users_my_page_path, notice:'投稿を削除しました'
   end
 
   def map

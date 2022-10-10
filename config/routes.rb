@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   end
 
   scope module: :public do
+    root to: 'homes#top'
     resources :spots do
       resources :posts, only: [:index, :create, :destroy]
       resource :favorites, only: [:create, :destroy, :index]
@@ -40,5 +41,4 @@ Rails.application.routes.draw do
     end
   end
 
-  root to: 'public/homes#top'
 end

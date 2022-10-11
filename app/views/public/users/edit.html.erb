@@ -15,10 +15,19 @@
       お子様
     </div>
     <div class = "col">
-      <% @children.each do |child| %>
-        <%= child.sex_i18n %>
-        <%= child.birth_date %><br />
-      <% end %>
+      <%# @children.each do |child| %>
+        <%#= child.sex_i18n %>
+        <%#= child.birth_date %>
+        <!--<br />-->
+      <%#= form_with model: @user do |f| %>
+        <%= s.fields_for :children do |child| %>
+          <%= render partial: 'public/registrations/child_fields', locals: {f: child} %>
+        <% end %>
+      <%# end %>
+
+
+
+      <%# end %>
 
       <div class="links">
         <%= link_to_add_association "子供を追加", s, :children, partial: "public/registrations/child_fields"%>

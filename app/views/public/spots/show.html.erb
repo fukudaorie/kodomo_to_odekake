@@ -10,7 +10,7 @@
     <div class = "col-md-3 offset-md-2 pt-5">
       <div class = "text-right">
       <% if @spot.image.attached? %>
-        <%= image_tag @spot.image, size: "200x200" %>
+        <%= image_tag @spot.image, class: "cover-img-200-200" %>
       <% else %>
         <%= image_tag asset_path('no_image.jpg'),:alt => '画像', size: "200x200" %>
       <% end %><br />
